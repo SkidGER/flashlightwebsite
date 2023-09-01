@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extreme Flashlight</title>
+    <link rel="icon" href="favicon.ico">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black; /* Hintergrund auf Schwarz setzen */
+        }
+
+        #flashlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            opacity: 0;
+            animation: flicker 0.001s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% {
+                opacity: 0.01;
+            }
+            100% {
+                opacity: 0.99;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="flashlight"></div>
+    
+    <script>
+        // JavaScript, um den Text im Titel zu flackern
+        const titleText = document.title;
+        let isFlickering = false;
+
+        setInterval(() => {
+            if (isFlickering) {
+                document.title = titleText;
+            } else {
+                document.title = "EXTREME FLASHLIGHT!";
+            }
+            isFlickering = !isFlickering;
+        }, 100);
+    </script>
+</body>
+</html>
