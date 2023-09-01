@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: black; /* Hintergrund auf Schwarz setzen */
+            background-color: black;
         }
 
         #flashlight {
@@ -32,15 +32,43 @@
                 opacity: 0.99;
             }
         }
+
+        /* Stil für die Emojikombinationen festlegen */
+        .emoji-combination {
+            position: absolute;
+            font-size: 24px; /* Passen Sie die Größe nach Bedarf an */
+            animation: emoji-flicker 1s infinite;
+        }
+
+        /* Keyframes für das Flackern der Emojikombinationen */
+        @keyframes emoji-flicker {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="flashlight"></div>
-    
+    <audio id="audio" src="https://f.sed.lol/files/FXeqD.mp3" preload="auto"></audio>
+
     <script>
-        // JavaScript, um den Text im Titel zu flackern
         const titleText = document.title;
         let isFlickering = false;
+        let isUpperCase = false;
+
+        // Event-Listener für Klicken auf die Seite hinzufügen
+        document.addEventListener('click', () => {
+            // Audio abspielen
+            const audio = document.getElementById('audio');
+            audio.play();
+        });
 
         setInterval(() => {
             if (isFlickering) {
@@ -49,7 +77,25 @@
                 document.title = "EXTREME FLASHLIGHT!";
             }
             isFlickering = !isFlickering;
-        }, 100);
+        }, 100); // Die Zeitspanne hier auf 100 Millisekunden verkürzt
+    </script>
+
+        // Funktion zum Hinzufügen von zufälligen Emojikombinationen
+        function addRandomEmojiCombination() {
+            const emojiCombinations = ['💫🌟', '✨🌠', '🌌💥', '🌟✨💥']; // Passende Emojikombinationen
+            const emojiCombination = emojiCombinations[Math.floor(Math.random() * emojiCombinations.length)];
+
+            const emojiCombinationElement = document.createElement('div');
+            emojiCombinationElement.classList.add('emoji-combination');
+            emojiCombinationElement.style.left = `${Math.random() * 100}vw`; // Zufällige horizontale Position
+            emojiCombinationElement.style.top = `${Math.random() * 100}vh`; // Zufällige vertikale Position
+            emojiCombinationElement.textContent = emojiCombination;
+
+            document.body.appendChild(emojiCombinationElement);
+        }
+
+        // Periodisch Emojikombinationen hinzufügen
+        setInterval(addRandomEmojiCombination, 100); // Hier können Sie das Intervall anpassen
     </script>
 </body>
 </html>
